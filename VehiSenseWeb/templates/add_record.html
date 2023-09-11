@@ -1,15 +1,185 @@
-{% extends 'base.html' %}
 {% block content %}
+{% if user.is_authenticated %}
+{% load static %}
+<!doctype html>
+<html lang="en">
 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add Record</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'add_record/css/arstyle.css' %}">
+    <!-- icon -->
+    <link rel="shortcut icon" href="{% static 'images/logo.svg' %}" type="image/x-icon">
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JavaScript (with Popper.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Wait for the document to be ready
+        $(document).ready(function () {
+            // Add an event listener to the termsLink
+            $("#termsLink").click(function (e) {
+                e.preventDefault();
+                $("#termsModal").modal("show");
+            });
+        });
+    </script>
+</head>
 
-<div class="col-md-6 offset-md-3">
-<h1> ADD RECORD </h1> 
-<form method="POST" action="{% url 'add_record' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Add Record</button>
-    <a href="{% url 'home' %}" class="btn btn-danger">Back</a>
-</form>
+<body
+    style="background-image:url('{% static 'images/register.jpg'%}');background-repeat: no-repeat; background-size: 100%"
+    ;>
+    <div class="form-bg d-flex align-items-center justify-content-center">
+        <!-- Added class d-flex and alignment classes -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div class="form-container">
+                        <a href="{% url 'customers' %}" class="btn back">Go Back</a>
+                        <h3 class="title">Add Customer</h3>
+                        <form class="form-horizontal" method="POST" action="{% url 'add_record' %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label>First Name</label>
+                                {{ form.first_name }}
+                            </div>
+                            <div class="form-group">
+                                <label>Last name</label>
+                                {{ form.last_name }}
+                            </div>
+                            <div class="form-group">
+                                <label>Gender</label>
+                                {{ form.gender }}
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                {{ form.email }}
+                            </div>
+                            <div class="form-group">
+                                <label>Phone</label>
+                                {{ form.phone }}
+                            </div>
+                            <h4 class="sub-title">Personal Information</h4>
+                            <div class="form-group">
+                                <label>Address</label>
+                                {{ form.address }}
+                            </div>
+                            <div class="form-group">
+                                <label>City</label>
+                                {{ form.city }}
+                            </div>
+                            <div class="form-group">
+                                <label>State</label>
+                                {{ form.state }}
+                            </div>
+                            <div class="form-group">
+                                <label>Zipcode</label>
+                                {{ form.zipcode }}
+                            </div>
+                            <div class="check-terms">
+                                <input type="checkbox" class="checkbox" required>
+                                <span class="check-label">
+                                    <a href="#" id="termsLink">I agree to the terms & conditions</a>
+                                </span>
+                            </div>
+                            <span class="signin-link">NOTE: Please Double Check Your Information</span>
+                            <button type="submit" class="btn signup">Add Record</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <!-- Modal -->
+    <div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="termsModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="termsModalLabel">Terms & Conditions</h5>
+                </div>
+                <div class="modal-body">
+                    <!-- Add your terms & conditions content here -->
+                    <!-- Example content: -->
+                    <h>Business Plan Format</h> <br><br>
+                    <p>1.0 Introduction and General Background of the Project</p>
+                    <p>1.1 Name of Business</p>
+                    <p>1.2 Business Address</p>
+                    <p>1.3 Nature of Business</p>
+                    <p>1.4 Form of Business</p>
+                    <p>1.5 Name of Owner/s</p>
+                    <p>1.6 Brief Description of Business</p>
+                    <p>1.7 Objectives</p>
+                    <p>2.0 Marketing Plan</p>
+                    <p>2.1 Description of the Product</p>
+                    <p>2.2 Comparison of the Product with the Competitors</p>
+                    <p>2.3 Location</p>
+                    <p>2.4 Market Area</p>
+                    <p>2.5 Main Customers</p>
+                    <p>2.6 Total Demand</p>
+                    <p>2.7 Market Share</p>
+                    <p>2.8 Selling Price</p>
+                    <p>2.9 Sales Forecast</p>
+                    <p>2.10 Promotional Feature</p>
+                    <p>2.11 Market Strategy</p>
+                    <p>2.12 Marketing Budget</p>
+                    <p>3.0 Production Plan</p>
+                    <p>3.1 Production Process</p>
+                    <p>3.2 Fixed Capital</p>
+                    <p>3.3 Life of Fixed Capital</p>
+                    <p>3.4 Maintenance and Repair</p>
+                    <p>3.5 Sources of Equipment</p>
+                    <p>3.6 Planned Capacity</p>
+                    <p>3.7 Future Capacity</p>
+                    <p>3.8 Terms and Conditions of Purchase of Equipment</p>
+                    <p>3.9 Factory Location and Layout</p>
+                    <p>3.10 Raw Materials Needed</p>
+                    <p>3.11 Cost of Raw Materials</p>
+                    <p>3.12 Raw Materials Availability</p>
+                    <p>3.13 Labor</p>
+                    <p>3.14 Cost of Labor</p>
+                    <p>3.15 Labor Availability</p>
+                    <p>3.16 Labor Productivity</p>
+                    <p>3.17 Factory Overhead Expenses</p>
+                    <p>3.18 Production Cost</p>
+                    <p>4.0 Organization and Management Plan</p>
+                    <p>4.1 Form of Business</p>
+                    <p>4.2</p>
+                    <p>4.3</p>
+                    <p>4.4 Pre-Operating Activities - Gantt Chart</p>
+                    <p>4.5 Pre-Operating Expenses</p>
+                    <p>4.6 Office Equipment</p>
+                    <p>4.7 Administrative Expenses</p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
 
+</body>
 
+</html>
+
+{% endif %}
+{% if messages %}
+{% for message in messages %}
+{% if message.tags == 'success' %}
+<script>
+    // Check if there are success messages
+    // Display SweetAlert for each success message
+    Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: '{{ message }}',
+    });
+</script>
+{% endif %}
+{% endfor %}
+{% endif %}
 {% endblock%}

@@ -1,0 +1,217 @@
+{% block content %}
+{% if user.is_authenticated %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add Vehicle</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'carbrand/css/style.css' %}">
+    <!-- icon -->
+    <link rel="shortcut icon" href="{% static 'images/logo.svg' %}" type="image/x-icon">
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Bootstrap JavaScript (with Popper.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Wait for the document to be ready
+        $(document).ready(function () {
+            // Add an event listener to the termsLink
+            $("#termsLink").click(function (e) {
+                e.preventDefault();
+                $("#termsModal").modal("show");
+            });
+        });
+    </script>
+</head>
+
+<body
+    style="background-image:url('{% static 'images/add_cartype.jpg'%}'); background-repeat: no-repeat; background-size: cover;">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="text-center">Add Vehicle</h2>
+                        <form class="form-horizontal" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+
+                            <!-- First Row -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="brand" class="form-label" style="font-weight: bold;">Brand</label>
+                                    <select name="brand" class="form-select" required>
+                                        {% for b in brands %}
+                                            <option value="{{ b.brand }}">{{ b.brand }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <!-- Dropdown menu for Type with a scrollbar -->
+                                    <label for="type" class="form-label" style="font-weight: bold;">Type</label>
+                                    <select name="type" class="form-select" required>
+                                        {% for c in cartypes %}
+                                            <option value="{{ c.type }}">{{ c.type }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Second Row -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="mileage" class="form-label" style="font-weight: bold;">Mileage</label>
+                                    <input type="text" required name="mileage" class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="model" class="form-label" style="font-weight: bold;">Model</label>
+                                    <input type="text" required name="model" class="form-control">
+                                </div>
+                            </div>
+
+                            <!-- Third Row -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <!-- Dropdown menu for Engine Type -->
+                                    <label for="enginetype" class="form-label" style="font-weight: bold;">Engine
+                                        Type</label>
+                                    <select name="enginetype" class="form-select" required>
+                                        <option value="Gasoline">Gasoline</option>
+                                        <option value="Diesel">Diesel</option>
+                                        <option value="Hybrid">Hybrid</option>
+                                        <option value="Petrol">Petrol</option>
+                                        <option value="Electric">Electric</option>
+                                    </select><br>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="transmission" class="form-label"
+                                        style="font-weight: bold;">Transmission</label>
+                                    <input type="text" required name="transmission" class="form-control">
+                                </div>
+                            </div>
+
+                            <!-- Fourth Row -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="technology" class="form-label"
+                                        style="font-weight: bold;">Technology</label>
+                                    <input type="text" required name="technology" class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="mvfileno" class="form-label" style="font-weight: bold;">M.V File
+                                        No.</label>
+                                    <input type="text" required name="mvfileno" class="form-control">
+                                </div>
+                            </div>
+
+                            <!-- Fifth Row -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="plate" class="form-label" style="font-weight: bold;">Plate
+                                        Number</label>
+                                    <input type="text" required name="plate" class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="variant" class="form-label" style="font-weight: bold;">Variant</label>
+                                    <input type="text" required name="variant" class="form-control">
+                                </div>
+                            </div>
+
+                            <!-- Sixth Row -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="color" class="form-label" style="font-weight: bold;">Color</label>
+                                    <input type="text" required name="color" class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="chasisno" class="form-label" style="font-weight: bold;">Chasis
+                                        No</label>
+                                    <input type="text" required name="chasisno" class="form-control">
+                                </div>
+                            </div>
+
+                            <!-- Seventh Row -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="engineno" class="form-label" style="font-weight: bold;">Engine
+                                        No</label>
+                                    <input type="text" required name="engineno" class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="price" class="form-label" style="font-weight: bold;">Price</label>
+                                    <input type="text" required name="price" class="form-control">
+                                </div>  
+                            </div>
+
+                            <!-- Eight Row -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="status" class="form-label" style="font-weight: bold;">Status</label>
+                                    <select name="status" class="form-select" required>
+                                        <option value="Available">Available</option>
+                                        <option value="Sold">Sold</option>
+                                        <option value="Repossessed">Repossessed</option>
+                                    </select><br>
+                                </div>
+                            </div>
+
+                            <!-- Ninth Row (Description) -->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="description" class="form-label"
+                                        style="font-weight: bold;">Description</label>
+                                    <textarea rows="3" required name="description" class="form-control"></textarea>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="image" class="form-label" style="font-weight: bold;">Image</label>
+                                    <input type="file" required name="image" class="form-control">
+                                </div>
+                            </div>
+
+                            <!-- Tenth Row (Buttons) -->
+                            <div class="row mt-3">
+                                <div class="col-md-12 text-center">
+                                    <button type="submit" class="btn btn-primary">Add Vehicle</button>
+                                    <a href="{% url 'all_vehicles' %}" class="btn btn-danger">Back</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
+        </script>
+
+</body>
+
+</html>
+
+{% endif %}
+{% if messages %}
+{% for message in messages %}
+{% if message.tags == 'success' %}
+<script>
+    // Check if there are success messages
+    // Display SweetAlert for each success message
+    Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: '{{ message }}',
+    });
+</script>
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endblock%}

@@ -1,65 +1,138 @@
-{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+<!doctype html>
+<html lang="en">
 
-{% block content %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Landing Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="{% static '/home/css/lpstyle.css'%}">
+    <!-- aos scroll -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- boxicons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <!-- or -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <!-- icon -->
+    <link rel="shortcut icon" href="{% static 'images/logo.svg' %}" type="image/x-icon">
+    <!-- Include SweetAlert 2 library -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
 
-{% if user.is_authenticated %}
+<body>
+    <!-- navbar section  -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'images/logo.svg' %}" alt="brand" style="max-width: 50px; max-height: 50px;">
+                <span> VehiSense </span>
+            </a>
+            <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class='bx bx-menu'></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="#">Contact</a>
+                    </li>
+                </ul>
+                <a href="#" class="btn btn-primary shadow-none">Get Started</a>
+            </div>
+        </div>
+    </nav>
+    <!-- hero section -->
+    <section class="hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="copy" data-aos="fade-up" data-aos-duration="1500">
+                        <div class="text-label">
+                            Welcome to VehiSense - Your Ultimate Vehicle Management Solution
+                        </div>
+                        <div class="text-hero-bold">
+                            Sensing Your Vehicle Needs.
+                        </div>
+                        <div class="text-hero-rgular">
+                            Discover how VehiSense can transform your operations and drive your success. Join industry
+                            leaders who trust us for efficient vehicle management.
+                        </div><br>
+                        <div class="cta">
+                            <a href="{% url 'login' %}" class="btn btn-primary"> Login </a>
+                            <a href="{% url 'register' %}" class="btn btn-secondary shadow-none ms-3"> Register </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" data-aos="fade-up" data-aos-duration="1500">
+                    <img src="{% static 'images/lp3.png' %}" alt="img" class="w-100"
+                        style="max-width: 800px; max-height: 800px;">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--Testimonial brand section -->
+    <section class="testimoni-brand">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 mt-5 mb-5 text-center">
+                    <img src="{% static 'images/testimoni.svg' %}" class="w-100" alt="testmoni-brand">
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
 
-<h1>Records</h1>
-<table class="table table-striped table-hover table-bordered table-sm">
-    <thead class="table-dark">
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Phone</th>
-            <th scope="col">Address</th>
-            <th scope="col">City</th>
-            <th scope="col">State</th>
-            <th scope="col">ZipCode</th>
-            <th scope="col">Date</th>
-            <th scope="col">Details</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% if records %}
-        {% for record in records %}
-        <tr>
-            <td>{{ record.id }}</td>
-            <td>{{ record.first_name }}
-                {{ record.last_name }}</td>
-            <td>{{ record.email }}</td>
-            <td>{{ record.phone }}</td>
-            <td>{{ record.address }}</td>
-            <td>{{ record.city }}</td>
-            <td>{{ record.state }}</td>
-            <td>{{ record.zipcode }}</td>
-            <td>{{ record.created_at }}</td>
-            <td class="center-button"><a class="btn btn-primary btn-sm" href="{% url 'record' record.id %}" role="button">Edit</a></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+</html>
+<!-- Add this script at the end of your HTML body -->
+{% if failed_login %}
+<script>
+    // Delay the display of the SweetAlert 2 pop-up by 1000 milliseconds (1 second)
+    setTimeout(function () {
+        // Trigger SweetAlert 2 pop-up for failed login with a delay
+        Swal.fire({
+            icon: 'error',
+            title: 'Login Failed',
+            text: 'There was an error logging in, Lmao',
+        });
+    }, 1000);
+</script>
 
 {% endif %}
 
-{% else %}
-<div class="col-md-6 offset-md-3">
-<h1> Login </h1>
-
-<br>
-<form method="POST" action="{% url 'home' %}">
-    {% csrf_token %}
-    <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Username</label>
-        <input type="text" class="form-control" name="username" required>
-    </div>
-    <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control" name="password" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Login</button>
-</form>
-</div>
-
+{% if messages %}
+{% for message in messages %}
+{% if message.tags == 'success' %}
+<script>
+    // Check if there are success messages
+    // Display SweetAlert for each success message
+    Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: '{{ message }}',
+    });
+</script>
+{% endif %}
+{% endfor %}
 {% endif %}
 {% endblock%}
