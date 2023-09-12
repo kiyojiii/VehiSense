@@ -90,7 +90,7 @@ def login_user(request):
             return redirect('dashboard')
         else:
             failed_login = True  # Set failed_login to True for a failed attempt
-            messages.error(request, "There Was An Error Logging In, Lmao")
+            messages.error(request, "There Was An Error Logging In, Please Try Again")
 
     return render(request, 'login.html', {'failed_login': failed_login})
 

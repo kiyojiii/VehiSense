@@ -39,19 +39,19 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Features</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" href="https://www.facebook.com/Kiyojiii" target="_blank">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="#">Contact</a>
+                        <a class="nav-link " href="https://www.facebook.com/Kiyojiii" target="_blank">Contact</a>
                     </li>
                 </ul>
-                <a href="#" class="btn btn-primary shadow-none">Get Started</a>
+                <a href="{% url 'login' %}" class="btn btn-primary shadow-none">Get Started</a>
             </div>
         </div>
     </nav>

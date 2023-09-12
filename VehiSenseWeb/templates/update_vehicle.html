@@ -56,15 +56,17 @@
                                 <div class="col-md-6">
                                     <label for="brand" class="form-label" style="font-weight: bold;">Brand</label>
                                     <select name="brand" class="form-control" required>
+                                        <option value="{{ all_vehicles.brand }}" selected>{{ all_vehicles.brand }}</option> <!-- Display the current brand first -->
                                         {% for b in brands %}
                                             <option value="{{ b.brand }}">{{ b.brand }}</option>
                                         {% endfor %}
                                     </select>
-                                </div>
+                                </div>                                                                                            
                                 <div class="col-md-6">
                                     <!-- Dropdown menu for Type -->
                                     <label for="type" class="form-label" style="font-weight: bold;">Type</label>
                                     <select name="type" class="form-control" required>
+                                        <option value="{{ all_vehicles.type }}" selected>{{ all_vehicles.type }}</option>
                                         {% for c in cartypes %}
                                             <option value="{{ c.type }}">{{ c.type }}</option>
                                         {% endfor %}
@@ -93,6 +95,7 @@
                                     <label for="enginetype" class="form-label" style="font-weight: bold;">Engine
                                         Type</label>
                                     <select name="enginetype" class="form-control" required>
+                                        <option value="{{ all_vehicles.enginetype }}" selected>{{ all_vehicles.enginetype }}</option>
                                         <option value="Gasoline">Gasoline</option>
                                         <option value="Diesel">Diesel</option>
                                         <option value="Hybrid">Hybrid</option>
@@ -174,9 +177,9 @@
                                 <div class="col-md-6">
                                     <label for="status" class="form-label" style="font-weight: bold;">Status</label>
                                     <select name="status" class="form-control" required>
-                                        <option value="Available">Available</option>
-                                        <option value="Sold">Sold</option>
-                                        <option value="Repossessed">Repossessed</option>
+                                        <option value="Available" {% if all_vehicles.status == 'Available' %}selected{% endif %}>Available</option>
+                                        <option value="Sold" {% if all_vehicles.status == 'Sold' %}selected{% endif %}>Sold</option>
+                                        <option value="Repossessed" {% if all_vehicles.status == 'Repossessed' %}selected{% endif %}>Repossessed</option>
                                     </select><br>
                                 </div>
                             </div>

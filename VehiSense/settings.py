@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'VehiSense.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'vehisense',
+        'NAME': 'vehisensev2',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',
